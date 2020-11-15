@@ -1,26 +1,17 @@
-<template>
-  <v-app>
-    <TodoAppBar
+<template lang="pug">
+  v-app
+    TodoAppBar(
       :search.sync="search"
       :sort="sort"
       @toggle-sort="toggleSort"
-    />
-    <v-main>
-      <v-container>
-        <TodoList
+    )
+    v-main
+      v-container
+        TodoList(
           :search="search"
-          :sort-by="[
-            'done',
-            sort.key
-          ]"
-          :sort-desc="[
-            false,
-            sort.desc
-          ]"
-        />
-      </v-container>
-    </v-main>
-  </v-app>
+          :sort-by="['done', sort.key]"
+          :sort-desc="[false, sort.desc]"
+        )
 </template>
 
 <script lang="ts">

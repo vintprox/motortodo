@@ -1,5 +1,5 @@
-<template>
-  <v-data-iterator
+<template lang="pug">
+  v-data-iterator(
     disable-pagination
     hide-default-footer
     no-data-text="Create new task and it will appear here"
@@ -9,30 +9,25 @@
     :items="tasks"
     :value="selectedTasks"
     @input="setSelectedTasks"
-  >
-    <template v-slot="{ items, isSelected, select }">
-      <transition-group
+  )
+    template(v-slot="{ items, isSelected, select }")
+      transition-group(
         class="row"
         name="list"
-      >
-        <template>
-          <v-col
+      )
+        template
+          v-col(
             cols="12"
             md="6"
             v-for="item in items"
             :key="item.id"
-          >
-            <TodoTask
+          )
+            TodoTask(
               v-bind="item"
               :selected="isSelected(item)"
               @update:selected="select(item, $event)"
               @update:done="done(item, $event)"
-            />
-          </v-col>
-        </template>
-      </transition-group>
-    </template>
-  </v-data-iterator>
+            )
 </template>
 
 <script lang="ts">

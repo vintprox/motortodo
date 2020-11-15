@@ -1,38 +1,36 @@
-<template>
-  <v-card
+<template lang="pug">
+  v-card(
     link
     v-bind="$attrs"
-    v-on="{
+    v-on=`{
       ...$listeners,
       [selectionMode ? 'click' : 'dblclick']: toggleSelected
-    }"
-    :class="[
+    }`
+    :class=`[
       'transition-swing',
       (selectionMode && selected) ? 'elevation-5' : 'elevation-1'
-    ]"
+    ]`
     :color="selected ? 'secondary' : done ? 'grey lighten-1' : 'white'"
     :dark="selected"
     @keydown.space="toggleSelected"
     @keydown.enter="toggleDone"
-  >
-    <v-card-title class="align-start flex-nowrap">
-      <v-checkbox
+  )
+    v-card-title(class="align-start flex-nowrap")
+      v-checkbox(
         class="ma-0 pa-0"
         hide-details
         tabindex="-1"
         :color="selected ? 'white' : 'grey darken-1'"
         :value="done"
         @click.stop="toggleDone"
-      />
-      <span
-        :class="[
+      )
+      span(
+        :class=`[
           'mx-2',
           'body-1',
           done ? 'text-decoration-line-through' : 'font-weight-medium'
-        ]"
-      >{{ summary }}</span>
-    </v-card-title>
-  </v-card>
+        ]`
+      ) {{ summary }}
 </template>
 
 <script lang="ts">
