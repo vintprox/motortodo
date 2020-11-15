@@ -1,29 +1,80 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+  <v-app>
+    <TodoAppBar
+      :search.sync="search"
+      :sort="sort"
+      @toggle-sort="toggleSort"
+    />
+    <v-main>
+      <v-container>
+        <TodoList
+          :search="search"
+          :sort-by="[
+            'done',
+            sort.key
+          ]"
+          :sort-desc="[
+            false,
+            sort.desc
+          ]"
+        />
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+import TodoAppBar from '@/components/TodoAppBar.vue'
+import TodoList from '@/components/TodoList.vue'
+import { SortingRule } from '@/types'
+
+export const sortingRules: SortingRule[] = [
+  {
+    key: 'id',
+    desc: true,
+    icon: 'mdi-sort-clock-descending',
+    label: 'Recent first'
+  },
+  {
+    key: 'id',
+    desc: false,
+    icon: 'mdi-sort-clock-ascending',
+    label: 'Older first'
+  },
+  {
+    key: 'summary',
+    desc: false,
+    icon: 'mdi-sort-alphabetical-ascending',
+    label: 'In alphabetical order'
+  }
+]
 
 export default Vue.extend({
   name: 'App',
   components: {
-    HelloWorld
+    TodoAppBar,
+    TodoList
+  },
+  data: () => ({
+    search: '',
+    sort: {} as SortingRule,
+    sortingRule: -1
+  }),
+  created () {
+    this.toggleSort()
+  },
+  methods: {
+    toggleSort () {
+      if (++this.sortingRule >= sortingRules.length) this.sortingRule = 0
+      this.sort = sortingRules[this.sortingRule]
+    }
   }
 })
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html {
+  user-select: none;
 }
 </style>
