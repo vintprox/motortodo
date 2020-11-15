@@ -12,11 +12,13 @@
           :sort-by="['done', sort.key]"
           :sort-desc="[false, sort.desc]"
         )
+    TodoDialog
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import TodoAppBar from '@/components/TodoAppBar.vue'
+import TodoDialog from '@/components/TodoDialog.vue'
 import TodoList from '@/components/TodoList.vue'
 import { SortingRule } from '@/types'
 
@@ -45,6 +47,7 @@ export default Vue.extend({
   name: 'App',
   components: {
     TodoAppBar,
+    TodoDialog,
     TodoList
   },
   data: () => ({

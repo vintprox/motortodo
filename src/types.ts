@@ -11,6 +11,8 @@ export type Task = TaskMeta & TaskContents
 
 export type TaskUpdate = TaskMeta & Partial<TaskContents>
 
+export type TaskTemporary = Partial<TaskUpdate>
+
 export interface SortingRule {
   key: string;
   desc: boolean;

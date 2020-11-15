@@ -23,37 +23,12 @@ export class TodoState {
   selectionMode = false
 
   selectedTasks: Task[] = []
-
-  taskDraft: TaskContents = {
-    done: false,
-    summary: ''
-  }
 }
 
 export class TodoGetters extends Getters<TodoState> {
 }
 
 export class TodoMutations extends Mutations<TodoState> {
-  /**
-   * Create a task from the task draft with next `id` assigned. Partially resets the contents of task draft.
-   */
-  addTaskFromDraft () {
-    const taskDraft = this.state.taskDraft
-
-    const task = {
-      ...taskDraft,
-      id: this.state.nextTaskId,
-      done: false
-    }
-    this.state.tasks.push(task)
-    this.state.nextTaskId++
-
-    this.state.taskDraft = {
-      ...taskDraft,
-      summary: ''
-    }
-  }
-
   /**
    * Set `id` for a next task.
    *
@@ -116,12 +91,18 @@ export class TodoMutations extends Mutations<TodoState> {
   }
 
   /**
-   * Modify data of the task draft.
+   * Create task.
    *
-   * @param payload Object with the contents of task draft
+   * @param payload Object with the contents of a new task
    */
-  setTaskDraft (payload: TaskContents) {
-    this.state.taskDraft = payload
+  createTask (payload: TaskContents) {
+    const task = {
+      ...payload,
+      id: this.state.nextTaskId,
+      done: false
+    }
+    this.state.tasks.push(task)
+    this.state.nextTaskId++
   }
 }
 
