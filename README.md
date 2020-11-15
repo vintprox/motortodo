@@ -1,29 +1,21 @@
 # motortodo
 
-## Project setup
-```
-npm install
+Test todo application. Somewhat smart...
+
+## Requirements
+Node.js is required.
+
+Run this to install project dependencies:
+```sh
+$ npm install
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+## Development server
+```sh
+$ npm run serve
 ```
 
-### Run your unit tests
+## Production build
+```sh
+$ npm run build
 ```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
