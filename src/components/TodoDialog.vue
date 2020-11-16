@@ -4,7 +4,7 @@
     persistent
     v-bind="$attrs"
     v-model="open"
-    v-on="on"
+    v-on="$listeners"
   )
     template(v-slot:activator="{ on }")
       v-btn(
@@ -14,6 +14,7 @@
         fab
         large
         right
+        v-on="on"
         v-show="task"
         :color="selectedTasks.length ? 'orange' : 'green'"
       )
